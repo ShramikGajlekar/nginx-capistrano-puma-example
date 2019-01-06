@@ -1,10 +1,9 @@
-server ENV['SERVER_IP'], user: 'root', roles: %w{app db web}
+server '35.157.239.228', user: 'root', roles: %w{app db web}
 
-set :repo_url,        ENV['REPO_URL']
+set :repo_url,        'git@github.com:ShramikGajlekar/nginx-capistrano-puma-example.git'
 set :application,     'Nginx-Example'
 set :puma_threads,    [4, 16]
 set :puma_workers,    4
-
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
@@ -76,7 +75,7 @@ namespace :deploy do
     end
   end
 
-  before :starting,     :kill_puma_process
+  #before :starting,     :kill_puma_process #uncomment this after first deploy
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

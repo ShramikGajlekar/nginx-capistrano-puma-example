@@ -57,7 +57,7 @@ namespace :deploy do
   desc 'Kill existing puma process'
   task :kill_puma_process do
   	on roles(:app) do
-  		execute 'sudo pkill -9 puma'
+  		execute 'sudo pkill -f puma'
   	end
   end
   desc 'Initial Deploy'
@@ -75,7 +75,7 @@ namespace :deploy do
     end
   end
 
-  #before :starting,     :kill_puma_process #uncomment this after first deploy
+  before :starting,     :kill_puma_process #uncomment this after first deploy
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
